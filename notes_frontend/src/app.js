@@ -7,16 +7,19 @@ class App {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.createCorpses = this.createCorpses.bind(this);
     this.addCorpses = this.addCorpses.bind(this);
+    // this.createLines = this.createLines.bind(this);
+    // this.addLines = this.addLines.bind(this);
   }
 
   attachEventListeners() {
-    document.querySelector('#corpses-list').addEventListener('click', this.handleEditClick);
     document.querySelector('#update').addEventListener('submit', this.handleFormSubmit);
+    document.querySelector('#corpses-list').addEventListener('click', this.handleEditClick);
+    // document.querySelector('#corpses-list .delete').addEventListener('click', this.handleDeleteClick);
+
   }
 
-  // notice the previous functionality is broken up
-  // into two different methods for future re-use...
   createCorpses(corpses) {
+    console.log(corpses)
     corpses.forEach(corpse => {
       new Corpse(corpse);
     });
@@ -24,11 +27,58 @@ class App {
   }
 
   addCorpses() {
-    document.querySelector('#corpses-list').innerHTML = '';
-    Corpse.all.forEach(
-      corpse => (document.querySelector('#corpses-list').innerHTML += corpse.renderListItem())
-    );
+    console.log(Line.all)
+    document.querySelector('#corpses-list').innerHTML = ''
+    // Corpse.all.forEach(
+    //   corpse => (document.querySelector('#corpses-list').innerHTML += corpse.renderListItem())
+    // );
+
+    Corpse.all.forEach( function(corpse){
+      document.querySelector('#corpses-list').innerHTML += corpse.renderListItem()
+      // console.log(corpse.id)
+
+      // let corpse_li = document.querySelector(`#corpse_id${corpse.id}`)
+        Line.all.forEach( function(line){
+          // console.log("line.corpse_id")
+          let corpse_li = document.querySelector(`#corpse_id${corpse.id}`)
+            // console.log(line.corpse_id === corpse.id)
+            
+          if (line.corpse_id === corpse.id){
+            let newli = document.createElement('li')
+            newli.innerHTML = line.content
+            console.log(newli)
+            corpse_li.appendChild(newli)
+          }
+        })
+
+    });
   }
+
+
+
+  createLines(lines) {
+    // console.log(lines)
+
+    lines.forEach(line => {
+      new Line(line);
+    });
+      // this.addLines()
+      // console.log(this)
+  }
+  //
+  // addLines() {
+  //   console.log(this)
+  //
+  //   document.querySelector('#lines-list').innerHTML = '';
+  //
+  //   document.querySelector('#lines-list').innerHTML = '';
+  //   Line.all.forEach(
+  //     line => (document.querySelector('#lines-list').innerHTML += line.renderListItem())
+  //   );
+  // }
+
+
+
 
   handleFormSubmit(e) {
     e.preventDefault();
@@ -37,15 +87,40 @@ class App {
     const title = e.target.querySelector('input').value;
     const imageURL = e.target.querySelector('textarea').value;
     const bodyJSON = { title, imageURL };
-    this.adapter.updateCorpse(corpse.id, bodyJSON).then(updatedCorpse => console.log(updatedCorpse));
+    this.adapter.updateCorpse(corpse.id, bodyJSON).then(updatedCorpse => {
+    const corpse = Corpse.findById(updatedCorpse.id);
+    corpse.update(updatedCorpse);
+    this.addCorpses();
+  });
   }
 
   handleEditClick(e) {
     const id = parseInt(e.target.dataset.id);
     const corpse = Corpse.findById(id);
+    if (event.target.id === "edit") {
     document.querySelector('#update').innerHTML = corpse.renderUpdateForm();
+  }else if (event.target.id === "delete"){
+    // console.log("delete")
+    // console.log(e.target)
+    // console.log(this.corpse.renderUpdateForm)
+    corpse.delete(id)
   }
 }
+
+  // handleDeleteClick(e) {
+  //   const id = parseInt(e.target.dataset.id);
+  //   const corpse = Corpse.findById(id);
+  //   if (event.target.id === "delete"){
+  //   // document.querySelector('#update').innerHTML = corpse.renderUpdateForm();
+  //   console.log(corpse)
+  //   }
+  // }
+
+
+
+
+}
+
 
 
 

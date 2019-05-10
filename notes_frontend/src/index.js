@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
+
+
+  app.adapter.fetchCorpses()
+  .then(app.createCorpses)
+
+  app.adapter.fetchLines()
+  .then(app.createLines);
   app.attachEventListeners();
-  app.adapter.fetchCorpses().then(app.createCorpses);
+
+  //
+  // app.adapter.fetchCorpses().then(app.createCorpses)
+  // lines = app.adapter.fetchLines().then(app.createLines);
+  // app.attachEventListeners();
 });
 
 

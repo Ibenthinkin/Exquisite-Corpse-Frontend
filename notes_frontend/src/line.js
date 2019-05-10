@@ -8,15 +8,28 @@ class Line {
     Line.all.push(this);
   }
 
+  static findById(id) {
+    return this.all.find(line => line.id === id);
+  }
+
+
   renderListItem() {
     return `
     <li>
-      <h3>${this.title}
+      <h4>${this.content}
         <button data-id=${this.id}>edit</button>
-      </h3>
-      
+      </h4>
+
     </li>`;
   }
+
+  update({ author, content, color }) {
+    this.author = author;
+    this.content = content;
+    this.color = color;
+
+  }
+
 }
 
 Line.all = [];

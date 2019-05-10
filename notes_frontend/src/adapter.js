@@ -15,6 +15,17 @@ class Adapter {
     return this.patch(`${this.baseUrl}/corpses/${id}`, body);
   }
 
+  fetchLines() {
+    // console.log(this.get(`${this.baseUrl}/lines`))
+    return this.get(`${this.baseUrl}/lines`);
+  }
+
+  updateLine(id, body) {
+    return this.patch(`${this.baseUrl}/lines/${id}`, body);
+  }
+
+
+
   get(url) {
     return fetch(url).then(res => res.json());
   }

@@ -10,8 +10,8 @@ class Corpse {
     return `
     <li id="corpse_id${this.id}" >
       <h3>${this.title}
-        <button data-id=${this.id} class="edit">edit</button>
-        <button data-id=${this.id} class="delete">delete</button>
+        <button data-id=${this.id} id="edit">edit</button>
+        <button data-id=${this.id} id="delete">delete</button>
       </h3>
     </li>`;
   }
@@ -36,7 +36,14 @@ class Corpse {
   `;
   }
 
+  delete(id){
+    console.log(id)
+  }
 
+    update({ title, imageURL }) {
+      this.title = title;
+      this.imageURL = imageURL;
+    }
 
 }
 
