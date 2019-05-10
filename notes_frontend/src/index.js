@@ -1,12 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
   app.attachEventListeners();
-
-  app.adapter.fetchCorpses().then(json => {
-    json.forEach(corpse => {
-      document.querySelector('#corpses-list').innerHTML += new Corpse(corpse).renderListItem();
-    });
-  });
+  app.adapter.fetchCorpses().then(app.createCorpses);
 });
 
 

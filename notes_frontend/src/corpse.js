@@ -10,7 +10,8 @@ class Corpse {
     return `
     <li id="corpse_id${this.id}" >
       <h3>${this.title}
-        <button data-id=${this.id}>edit</button>
+        <button data-id=${this.id} class="edit">edit</button>
+        <button data-id=${this.id} class="delete">delete</button>
       </h3>
     </li>`;
   }

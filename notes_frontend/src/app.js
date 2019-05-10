@@ -1,58 +1,105 @@
 class App {
-
   constructor() {
     this.adapter = new Adapter();
+
+    // this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.createCorpses = this.createCorpses.bind(this);
+    this.addCorpses = this.addCorpses.bind(this);
   }
 
   attachEventListeners() {
-    document.querySelector('#corpses-list').addEventListener('click', e => {
-      const id = parseInt(e.target.dataset.id);
-      const corpse = Corpse.findById(id);
-      document.querySelector('#update').innerHTML = corpse.renderUpdateForm();
+    document.querySelector('#corpses-list').addEventListener('click', this.handleEditClick);
+    document.querySelector('#update').addEventListener('submit', this.handleFormSubmit);
+  }
 
-      // const update = document.querySelector('#update')
-      // corpse_li.appendChild(update.innerHTML = corpse.renderUpdateForm())
-      // let corpse_li = document.querySelector(`#corpse_id${id}`)
-      // let update = document.createElement('form')
-      // update.innerHTML = corpse.renderUpdateForm()
-      // corpse_li.appendChild(update)
+  // notice the previous functionality is broken up
+  // into two different methods for future re-use...
+  createCorpses(corpses) {
+    corpses.forEach(corpse => {
+      new Corpse(corpse);
     });
+    this.addCorpses();
+  }
 
-    // document.querySelector('#update').addEventListener('submit', e => {
-    //   e.preventDefault();
-    //   const id = parseInt(e.target.dataset.id);
-    //   const corpse = Corpse.findById(id);
-    //   const title = e.target.querySelector('input').value;
-    //   const imageURL = e.target.querySelector('textarea').value;
-    //   const bodyJSON = { title, imageURL };
-    //   fetch(`http://localhost:3000/api/v1/corpses/${corpse.id}`, {
-    //     method: 'PATCH',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Accept: 'application/json',
-    //     },
-    //     body: JSON.stringify(bodyJSON),
-    //   })
-    //     .then(res => res.json())
-    //     // our backend responds with the updated corpse instance represented as JSON
-    //     .then(updatedCorpse => console.log(updatedCorpse));
-    // });
+  addCorpses() {
+    document.querySelector('#corpses-list').innerHTML = '';
+    Corpse.all.forEach(
+      corpse => (document.querySelector('#corpses-list').innerHTML += corpse.renderListItem())
+    );
+  }
 
+  handleFormSubmit(e) {
+    e.preventDefault();
+    const id = parseInt(e.target.dataset.id);
+    const corpse = Corpse.findById(id);
+    const title = e.target.querySelector('input').value;
+    const imageURL = e.target.querySelector('textarea').value;
+    const bodyJSON = { title, imageURL };
+    this.adapter.updateCorpse(corpse.id, bodyJSON).then(updatedCorpse => console.log(updatedCorpse));
+  }
 
-    document.querySelector('#update').addEventListener('submit', e => {
-      e.preventDefault();
-      const id = parseInt(e.target.dataset.id);
-      const corpse = Corpse.findById(id);
-      const title = e.target.querySelector('input').value;
-      const imageURL = e.target.querySelector('textarea').value;
-      const jsonBody = { title, imageURL };
-      this.adapter.updateCorpse(corpse.id, jsonBody).then(updatedCorpse => console.log(updatedCorpse));
-    });
-
-
-
-
-
-
+  handleEditClick(e) {
+    const id = parseInt(e.target.dataset.id);
+    const corpse = Corpse.findById(id);
+    document.querySelector('#update').innerHTML = corpse.renderUpdateForm();
   }
 }
+
+
+
+
+// class App {
+//
+//   constructor() {
+//     this.adapter = new Adapter();
+//   }
+//
+//   attachEventListeners() {
+//     document.querySelector('#corpses-list').addEventListener('click', e => {
+//       const id = parseInt(e.target.dataset.id);
+//       const corpse = Corpse.findById(id);
+//       document.querySelector('#update').innerHTML = corpse.renderUpdateForm();
+//
+//       // const update = document.querySelector('#update')
+//       // corpse_li.appendChild(update.innerHTML = corpse.renderUpdateForm())
+//       // let corpse_li = document.querySelector(`#corpse_id${id}`)
+//       // let update = document.createElement('form')
+//       // update.innerHTML = corpse.renderUpdateForm()
+//       // corpse_li.appendChild(update)
+//     });
+//
+//     // document.querySelector('#update').addEventListener('submit', e => {
+//     //   e.preventDefault();
+//     //   const id = parseInt(e.target.dataset.id);
+//     //   const corpse = Corpse.findById(id);
+//     //   const title = e.target.querySelector('input').value;
+//     //   const imageURL = e.target.querySelector('textarea').value;
+//     //   const bodyJSON = { title, imageURL };
+//     //   fetch(`http://localhost:3000/api/v1/corpses/${corpse.id}`, {
+//     //     method: 'PATCH',
+//     //     headers: {
+//     //       'Content-Type': 'application/json',
+//     //       Accept: 'application/json',
+//     //     },
+//     //     body: JSON.stringify(bodyJSON),
+//     //   })
+//     //     .then(res => res.json())
+//     //     // our backend responds with the updated corpse instance represented as JSON
+//     //     .then(updatedCorpse => console.log(updatedCorpse));
+//     // });
+//
+//
+//     document.querySelector('#update').addEventListener('submit', e => {
+//       e.preventDefault();
+//       const id = parseInt(e.target.dataset.id);
+//       const corpse = Corpse.findById(id);
+//       const title = e.target.querySelector('input').value;
+//       const imageURL = e.target.querySelector('textarea').value;
+//       const jsonBody = { title, imageURL };
+//       this.adapter.updateCorpse(corpse.id, jsonBody).then(updatedCorpse => console.log(updatedCorpse));
+//     });
+//
+//   }
+// }
