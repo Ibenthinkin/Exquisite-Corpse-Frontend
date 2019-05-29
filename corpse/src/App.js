@@ -12,6 +12,9 @@ export default class App extends React.Component{
   }
 
 
+    addLine = (line) => {
+      console.log(line)
+    }
 
   async componentDidMount () {
        const response = await fetch('http://localhost:3000/api/v1/corpses/')
@@ -24,7 +27,7 @@ export default class App extends React.Component{
 render(){
   return (
     <div> <h1>Corpse</h1>
-      <CorpseContainer corpses={this.state.corpses}/>
+      <CorpseContainer addLine={this.addLine} corpses={this.state.corpses}/>
     </div>
   );
 }

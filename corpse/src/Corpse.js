@@ -4,44 +4,64 @@ import AddLineForm from './AddLineForm'
 
  class Corpse extends Component {
 
-   constructor(){
+   constructor(props){
      super()
      this.state = {
-       showAll: false,
-       addLine: false,
-       generateLine: false
+       showAllClick: false,
+       addLineClick: false,
+       generateLineClick: false
 
      }
    }
 
-
- handleShowAll = (e) => {
-    this.setState({ showAll: !this.state.showAll})
-
+ handleShowAllClick = (e) => {
+    this.setState({ showAllClick: !this.state.showAllClick})
+    console.log(this.props.id)
    }
 
- handleAddLine = (e) => {
-   this.setState({ addLine: !this.state.addLine})
-   }
+handleAddLineClick = (e) => {
+    if (this.state.generateLineClick) {
+      this.setState({
+        generateLineClick: !this.state.generateLineClick
+       })
+    } else {
+       this.setState({
+         generateLineClick: false,
+         addLineClick: !this.state.addLineClick
+       })
+    }
+}
 
- handleGenerateLine = (e) => {
-   this.setState({
-      generateLine: !this.state.addLine,
-      addLine: !this.state.addLine
-    })
+ handleGenerateLineClick = (e) => {
+   if (this.state.addLineClick) {
+     this.setState({
+         generateLineClick: !this.state.generateLineClick
+     })
+   } else {
+     this.setState({
+       generateLineClick: !this.state.generateLineClick,
+       addLineClick: !this.state.addLineClick
+     })
    }
+ }
 
 
   render() {
     return(
       <div>
         <h2>{this.props.title}</h2>
-        <button onClick={this.handleAddLine}>Add Line</button>
-        <button onClick={this.handleShowAll} name='showAll'>Show Whole Corpse</button>
-        <button onClick={this.handleGenerateLine}>Generate New Line</button>
+        <button onClick={this.handleAddLineClick}>Add Line</button>
+        <button onClick={this.handleShowAllClick} name='showAll'>Show Whole Corpse</button>
+        <button onClick={this.handleGenerateLineClick}>Generate New Line</button>
 
-        <LinesContainer showAll={this.state.showAll} lines={this.props.lines}/>
-        <AddLineForm addLine={this.state.addLine} generateLine={this.state.generateLine}/>
+        <LinesContainer showAllClick={this.state.showAllClick}
+        lines={this.props.lines}/>
+
+        <AddLineForm
+        corpseId={this.props.id}
+         addLine={this.props.addLine}
+         addLineClick={this.state.addLineClick}
+         generateLineClick={this.state.generateLineClick}/>
       </div>
     )
   }

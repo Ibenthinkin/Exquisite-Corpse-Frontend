@@ -6,7 +6,7 @@ const LinesContainer = props => {
 
   return (
     <div>
-      {props.showAll ? lines : lines.slice(-1)[0].props.content}
+      {props.showAllClick ? lines : lines.slice(-1)[0].props.content}
     </div>
     )
 }

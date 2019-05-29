@@ -5,8 +5,9 @@ class AddLineForm extends React.Component{
   constructor(props){
     super()
     this.state = {
-      name: '',
-      author: ''
+      content: '',
+      author: '',
+      corpseId: props.corpseId
     }
   }
 
@@ -20,11 +21,15 @@ class AddLineForm extends React.Component{
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.addAddLine(this.state)
+    this.props.addLine(this.state)
+    this.setState ({
+      content: '',
+      author: ''
+    })
   }
 
   placeHolderAuthor = () => {
-    if (!this.props.generateLine) {
+    if (!this.props.generateLineClick) {
       return "Write your name here";
     } else {
       return "GENERETED AUTHOR"
@@ -32,7 +37,7 @@ class AddLineForm extends React.Component{
   }
 
   placeHolderLine = () => {
-    if (!this.props.generateLine) {
+    if (!this.props.generateLineClick) {
       return "Write a new line here";
     } else {
       return "GENERETED LINE OF POEMS"
@@ -41,14 +46,18 @@ class AddLineForm extends React.Component{
 
 
   render(){
-      if (!this.props.addLine) {
+      if (!this.props.addLineClick) {
         return null;
       }
+
+      const { content, author } = this.state;
+      const isEnabled = content.length > 0 && author.length > 0;
+
     return(
       <form onSubmit={this.handleSubmit}>
         <textarea name='content' placeholder={this.placeHolderLine()} value={this.state.content} onChange={this.handleOnChange}/><br/>
         <input name='author' placeholder={this.placeHolderAuthor()} value={this.state.author} onChange={this.handleOnChange}/><br/>
-        <button>Submit</button>
+        <button disabled={!isEnabled}>Submit</button>
       </form>
     )
   }
