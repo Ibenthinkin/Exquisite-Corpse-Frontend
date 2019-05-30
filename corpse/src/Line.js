@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 
- const Line = props => {
-
-  const pressDelete = () => {
-     props.delete(props.id, props.corpse_id)
-   }
-
-   const pressEdit = () => {
-      props.update(props.id, props.corpse_id)
+export default class Line extends Component {
+  constructor(props){
+    super()
+    this.state = {
+      content: props.content,
+      author: props.author,
+      id: props.id,
+      corpse_id: props.corpse_id,
+      editable: false
     }
+  }
 
-    return (
-      <div>
-        <h4>{props.content}</h4>
-        <button value={props}onClick={pressDelete}>Delete</button>
-        <button value={props}onClick={pressEdit}>Edit</button>
-      </div>
-    )
 
+  pressDelete = () => {
+     this.props.delete(this.props.id, this.props.corpse_id)
+  }
+
+  pressEdit = () => {
+      this.props.update(this.state)
+      this.setState({editable: !this.state.editable})
+      console.log(this.state.editable)
+  }
+
+  render(){
+
+      return (
+        <div>
+          <h4>{this.props.content}</h4>
+          <button value={this.props}onClick={this.pressDelete}>Delete</button>
+          <button value={this.props}onClick={this.pressEdit}>Edit</button>
+        </div>
+      )
+  }
 }
-
-export default Line
