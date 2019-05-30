@@ -79,9 +79,57 @@ handleDelete = (id, corpse_id) => {
     })
   }
 
-handleUpdate = (id, corpse_id) =>{
-  console.log(id, corpse_id)
+handleUpdate = (line) =>{
+
+  fetch(`http://localhost:3000/api/v1/lines/${line.id}`,
+  {
+    method: 'PATCH',
+    body: JSON.stringify(line),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => {
+      this.updateLineInState(line)
+    })
+    .then((response)=>{
+      console.log('Line was edited!')
+    })
 }
+
+// updateLineFromState = (line) =>{
+//   console.log(line)
+// }
+
+updateLineInState = (line) => {
+   const newCorpses = this.state.corpses.map(corpse =>{
+     if (corpse.id !== line.corpse_id){
+         return corpse;
+     } else {
+       const newLines = corpse.lines.filter((oldLine) =>  (oldLine.id !== line.id));
+
+        newLines.push(line)
+
+         return {
+         ...corpse,
+           lines: newLines
+         }
+   }})
+
+ this.setState({
+     corpses: newCorpses
+   })
+ }
+
+ //
+ // updateFruit(fruit){
+ //    let newFruits = this.state.fruits.filter((f) => f.id !== fruit.id)
+ //    newFruits.push(fruit)
+ //    this.setState({
+ //      fruits: newFruits
+ //    })
+ //  }
+
+
 
 
 

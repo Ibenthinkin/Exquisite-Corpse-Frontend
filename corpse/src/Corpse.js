@@ -64,6 +64,7 @@ handleAddLineClick = (e) => {
         corpse_id={this.props.id}
          addLine={this.props.addLine}
          addLineClick={this.state.addLineClick}
+         handleAddLineClick={this.handleAddLineClick}
          generateLineClick={this.state.generateLineClick}/>
       </div>
     )

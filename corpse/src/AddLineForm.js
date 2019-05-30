@@ -25,6 +25,7 @@ class AddLineForm extends React.Component{
       content: '',
       author: ''
     })
+    this.props.handleAddLineClick()
   }
 
   placeHolderAuthor = () => {
