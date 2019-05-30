@@ -7,13 +7,12 @@ class AddLineForm extends React.Component{
     this.state = {
       content: '',
       author: '',
-      corpseId: props.corpseId
+      corpse_id: props.corpse_id
     }
   }
 
   handleOnChange = (e) => {
     const { name, value } = e.target
-
       this.setState({
         [name] : value
       })

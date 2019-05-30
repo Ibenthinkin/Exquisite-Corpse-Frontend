@@ -10,7 +10,6 @@ import AddLineForm from './AddLineForm'
        showAllClick: false,
        addLineClick: false,
        generateLineClick: false
-
      }
    }
 
@@ -54,11 +53,15 @@ handleAddLineClick = (e) => {
         <button onClick={this.handleShowAllClick} name='showAll'>Show Whole Corpse</button>
         <button onClick={this.handleGenerateLineClick}>Generate New Line</button>
 
-        <LinesContainer showAllClick={this.state.showAllClick}
-        lines={this.props.lines}/>
+        <LinesContainer
+        showAllClick={this.state.showAllClick}
+        lines={this.props.lines}
+        addLine={this.props.addLine}
+        delete={this.props.delete}
+        update={this.props.update}/>
 
         <AddLineForm
-        corpseId={this.props.id}
+        corpse_id={this.props.id}
          addLine={this.props.addLine}
          addLineClick={this.state.addLineClick}
          generateLineClick={this.state.generateLineClick}/>

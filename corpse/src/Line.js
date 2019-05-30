@@ -1,17 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 
- class Line extends Component {
+ const Line = props => {
 
+  const pressDelete = () => {
+     props.delete(props.id, props.corpse_id)
+   }
 
+   const pressEdit = () => {
+      props.update(props.id, props.corpse_id)
+    }
 
-  render() {
-    return(
+    return (
       <div>
-        <h4>{this.props.content}</h4>
-
+        <h4>{props.content}</h4>
+        <button value={props}onClick={pressDelete}>Delete</button>
+        <button value={props}onClick={pressEdit}>Edit</button>
       </div>
     )
-  }
+
 }
 
 export default Line
