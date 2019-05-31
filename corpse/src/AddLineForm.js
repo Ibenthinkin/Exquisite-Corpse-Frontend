@@ -1,15 +1,20 @@
 import React from 'react'
 import './App.scss';
+import {items} from './Seed'
+import {names} from './Seed'
+
 
 class AddLineForm extends React.Component{
 
   constructor(props){
     super()
-    this.state = {
-      content: '',
-      author: '',
-      corpse_id: props.corpse_id
-    }
+
+      this.state = {
+        content: '',
+        author: '',
+        corpse_id: props.corpse_id
+      }
+
   }
 
   handleOnChange = (e) => {
@@ -29,19 +34,25 @@ class AddLineForm extends React.Component{
     this.props.handleAddLineClick()
   }
 
+  selector = (array) => {
+    return array[Math.floor(Math.random()*items.length)];
+  }
+
+
+
   placeHolderAuthor = () => {
     if (!this.props.generateLineClick) {
       return "Write your name here";
     } else {
-      return "GENERETED AUTHOR"
+      return (this.selector(names))
     }
   }
 
   placeHolderLine = () => {
     if (!this.props.generateLineClick) {
-      return "Write a new line here";
+      return "Write a new line here"
     } else {
-      return "GENERETED LINE OF POEMS"
+      return (this.selector(items))
     }
   }
 
@@ -52,7 +63,7 @@ class AddLineForm extends React.Component{
       }
 
       const { content, author } = this.state;
-      const isEnabled = content.length > 0 && author.length > 0;
+      const isEnabled = content.length > 0 && author.length > 0 || this.props.generateLineClick
 
     return(
       <form onSubmit={this.handleSubmit}>

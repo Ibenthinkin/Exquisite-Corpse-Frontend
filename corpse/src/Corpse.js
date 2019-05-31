@@ -3,6 +3,8 @@ import LinesContainer from './LinesContainer'
 import AddLineForm from './AddLineForm'
 import './App.scss';
 import './navbarStyle.scss';
+import {items} from './Seed'
+import {names} from './Seed'
 
 
  class Corpse extends Component {
@@ -15,6 +17,10 @@ import './navbarStyle.scss';
        generateLineClick: false
      }
    }
+
+ // selector = (array) => {
+ //   return items[Math.floor(Math.random()*items.length)];
+ // }
 
  handleShowAllClick = (e) => {
     this.setState({ showAllClick: !this.state.showAllClick})
@@ -47,6 +53,8 @@ handleAddLineClick = (e) => {
  }
 
 
+
+
   render() {
     return(
       <div className='corpse'>
@@ -68,67 +76,10 @@ handleAddLineClick = (e) => {
          addLineClick={this.state.addLineClick}
          handleAddLineClick={this.handleAddLineClick}
          generateLineClick={this.state.generateLineClick}/>
+
       </div>
     )
   }
 }
 
 export default Corpse
-
-
-
-// render() {
-//   const currentUser = utils.getUserName();
-//   const { colors, palate, title, note, creator } = this.state;
-//   const createdBy = creator !== currentUser
-//     ? `created by: ${creator}`
-//     : 'created by you';
-//   const palateColors = colors.length
-//     ? colors.map((color, i) => (
-//         <ColorItem key={i + color} color={color} />
-//       ))
-//     : null;
-//   return (
-//     <div className='palette__wrapper'>
-//       <svg width={'400px'} height={'400px'} id={'rePalate'}>
-//         {palate}
-//       </svg>
-//       <p>
-//         {createdBy}
-//       </p>
-//       <h1>{title}</h1>
-//       <p>{note}</p>
-//       {palateColors}
-//       <br />
-//       <br />
-//       {!title && creator === currentUser ? (
-//         <div>
-//           <NoteForm />
-//           <button className={'nice-button'} onClick={this.updateInfo}>
-//             Update
-//           </button>
-//         </div>
-//       ) : null}
-//       <br />
-//       <br />
-//       {(creator === currentUser) && (
-//         <Link to={`/${currentUser}/palates`}>
-//           <button
-//             className={'mean-button'}
-//             onClick={this.handleClick}
-//           >
-//             Delete Your Palate
-//           </button>
-//         </Link>
-//       )}
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-// <p> {props.description}</p>
-// <button onClick={() => props.removeTodo(props.id)}>Delete</button>

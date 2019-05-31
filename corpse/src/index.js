@@ -5,6 +5,8 @@ import './index.css';
 import App from './App';
 import Login from './Login'
 import About from './About'
+import PoemGenerator from './PoemGenerator'
+
 import * as serviceWorker from './serviceWorker';
 
 
@@ -16,6 +18,8 @@ const routing = (
       <Route exact path="/" component={App} />
       <Route path="/Login" component={Login} />
       <Route path="/About" component={About} />
+      <Route path="/PoemGenerator" component={PoemGenerator} />
+
     </div>
   </Router>
 )
