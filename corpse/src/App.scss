@@ -1,0 +1,148 @@
+$chromatic-grey: #8383A1;
+
+.page {
+  background: #efefef;
+}
+
+
+.all-corpses {
+
+    align: center;
+    display: grid;
+    justify-content: center;
+    grid-gap: 1em;
+    text-align: center;
+      text-decoration: none;
+      color: $chromatic-grey;
+}
+
+.corpse {
+  // align: center;
+  // display: grid;
+  // justify-content: center;
+  // text-align: center;
+  // padding: 40px;
+  // border: 1px solid #ccc;
+  // background-color: white;
+  margin: 10% auto;
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 400px;
+  padding: 10px 30px 50px;
+  transition: .5s ease-in-out;
+  &>h1{
+    transition: .5s ease-in-out;
+  }
+  &>input {
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+  &:hover {
+    border: 1px solid black;
+  }
+  &>h1:hover {
+    color: black;
+  }
+
+}
+
+.nice-button {
+  // @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(0, 255, 0, .5);
+    border: 1px solid rgba(0, 255, 0, 1);
+  }
+}
+
+.blue-button {
+  // @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(0, 0, 255, .33);
+    border: 1px solid rgba(0, 0, 255, .33);
+    transition: .75s ease-in-out;
+  }
+}
+
+.red-button {
+  // @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(255, 0, 0, .33);
+    border: 1px solid rgba(255, 0, 0, .33);
+    transition: .75s ease-in-out;
+  }
+}
+
+.green-button {
+  // @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(0, 255, 0, .33);
+    border: 1px solid rgba(0, 255, 0, .33);
+    transition: .75s ease-in-out;
+  }
+}
+
+// .text {
+//   margin-top: 0;
+//   color: rgba(255, 0, 0, .33);
+// }
+//
+// .text2 {
+//   margin-top: 0;
+//   color: rgba(0, 255, 0, .33);
+//   transition: .75s ease-in-out;
+// }
+//
+// .text3 {
+//   margin-top: 0;
+//   color: rgba(0, 0, 255, .33);
+//   transition: .75s ease-in-out;
+// }
+
+
+
+
+
+
+
+
+
+.wide-input {
+  margin-bottom: 20px;
+  padding: 5px;
+  width: 300px;
+}
+
+.mean-button {
+  // @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(255, 0, 0, .75);
+    border: 1px solid rgba(255, 0, 0, 1);
+  }
+}
+
+.login-signup-form {
+  margin: 10% auto;
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 200px;
+  padding: 10px 30px 50px;
+  transition: .5s ease-in-out;
+  &>h1{
+    transition: .5s ease-in-out;
+  }
+  &>input {
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+  &:hover {
+    border: 1px solid black;
+  }
+  &>h1:hover {
+    color: black;
+  }
+}

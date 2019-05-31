@@ -1,5 +1,6 @@
 import React from 'react'
 import Line from './Line'
+import './App.scss';
 
 const LinesContainer = props => {
   const lines = props.lines.map((line, i) => <Line {...line}

@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.scss';
 
 class AddLineForm extends React.Component{
 
@@ -55,8 +56,8 @@ class AddLineForm extends React.Component{
 
     return(
       <form onSubmit={this.handleSubmit}>
-        <textarea name='content' placeholder={this.placeHolderLine()} value={this.state.content} onChange={this.handleOnChange}/><br/>
-        <input name='author' placeholder={this.placeHolderAuthor()} value={this.state.author} onChange={this.handleOnChange}/><br/>
+        <input className='wide-input' type='text' name='content' placeholder={this.placeHolderLine()} value={this.state.content} onChange={this.handleOnChange}/><br/>
+        <input  type='text' name='author' placeholder={this.placeHolderAuthor()} value={this.state.author} onChange={this.handleOnChange}/><br/>
         <button disabled={!isEnabled}>Submit</button>
       </form>
     )

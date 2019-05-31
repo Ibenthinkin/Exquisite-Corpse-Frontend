@@ -1,6 +1,7 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import CorpseContainer from './CorpseContainer'
+import Navbar from './Navbar'
 
 export default class App extends React.Component{
 
@@ -18,7 +19,7 @@ export default class App extends React.Component{
   }
 
   addLineToState = (response) => {
-    const lines = [...this.state.corpses[response.corpse_id].lines]
+    const lines = [...this.state.corpses[response.corpse_id-1].lines]
     const newCorpses = this.state.corpses.map(corpse =>{
       if (corpse.id !== response.corpse_id)  return corpse;
       return {
@@ -137,11 +138,16 @@ updateLineInState = (line) => {
 
 render(){
   return (
-    <div> <h1>Corpse</h1>
-      <CorpseContainer addLine={this.addLine}
-      corpses={this.state.corpses}
-      delete={this.handleDelete}
-      update={this.handleUpdate}/>
+
+    <div className='page'>
+      <Navbar/>
+
+          <CorpseContainer
+          addLine={this.addLine}
+          corpses={this.state.corpses}
+          delete={this.handleDelete}
+          update={this.handleUpdate}/>
+
     </div>
   );
 }

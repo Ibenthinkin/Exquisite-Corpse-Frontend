@@ -1,5 +1,6 @@
 import React from 'react'
 import Corpse from './Corpse'
+import './App.scss';
 
 const CorpseContainer = props => {
   const corpses = props.corpses.map((corpse, i) => <Corpse {...corpse}
@@ -8,7 +9,7 @@ const CorpseContainer = props => {
   delete={props.delete}
   update={props.update}/>)
   return (
-    <div>
+    <div className={'all-corpses'}>
       {corpses}
     </div>
     )

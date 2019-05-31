@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.scss';
 
 export default class Line extends Component {
   constructor(props){
@@ -58,8 +59,8 @@ export default class Line extends Component {
       return (
         <div>
           <h4>{this.state.content}</h4>
-          <button value={this.state}onClick={this.pressDelete}>Delete</button>
-          <button value={this.state}onClick={this.pressEdit}>Edit</button>
+          <button className={'mean-button'} value={this.state}onClick={this.pressDelete}>Delete</button>
+          <button className={'nice-button'}value={this.state}onClick={this.pressEdit}>Edit</button>
         </div>
       )} else {
         return (
